@@ -20,5 +20,7 @@ class Main
     output = File.open('./data/expected_output.json','w')
     output << JSON.generate(@hrentals)
     output.close
+
+    return "generated"
   end
 end
