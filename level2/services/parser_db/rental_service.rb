@@ -24,7 +24,6 @@ module ParserDb
     def count_rental
       @price = 0
       days.times do |day|
-        puts "day -=-=-=-=-=-=-#{day} purcent -=-=-=-=-=-#{get_purcent(day)}"
         @price += (@car.price_per_day - @car.price_per_day*get_purcent(day))
       end
       {id: params['id'], price: get_price.to_i}
@@ -32,7 +31,7 @@ module ParserDb
 
     private
     def get_price
-       @price + @car.price_per_day + params['distance'] * @car.price_per_km
+      @price + params['distance'] * @car.price_per_km
     end
 
     def days
