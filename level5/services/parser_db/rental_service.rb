@@ -11,6 +11,8 @@ module ParserDb
       @start_date = params['start_date']
       @purcents = [0, 0.1, 0.1, 0.1, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.5]
       @price = 0
+      @price_option = 0
+      @result_options = Array.new
     end
     attr_accessor :params, 
                   :car, 
@@ -21,6 +23,8 @@ module ParserDb
                   :start_date
                   :assistance
                   :options
+                  :price_option
+                  :result_options
 
     attr_reader :purcents
 
@@ -36,9 +40,22 @@ module ParserDb
 
     def count_rental
       price
-      return {id:         params['id'], 
-              action: ParserDb::PaymentService.new(self, AssistanceService.new(get_price, days)).call
+      return {id:      params['id'],
+              options: options,
+              action:  ParserDb::PaymentService.new(self, AssistanceService.new(get_price, days, @result_options, @price_option)).call
              }
+    end
+
+    def options
+      @result_options = Array.new
+      return @result_options if @options.empty?
+      @options.each do |option|
+        if option.rental_id == @id
+          @price_option +=  option.available_options[option.type.to_sym][:cost]
+          @result_options.push(option.type)
+        end
+      end
+      return @result_options
     end
 
     def price
