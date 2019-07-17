@@ -37,7 +37,7 @@ module ParserDb
       return {id:         params['id'], 
               #price:      get_price.to_i, 
               #action: AssistanceService.new(get_price, days).call
-              action: ParserDb::PaymentService.new(self, AssistanceService.new(get_price, days)).call
+              action: ParserDb::PaymentService.new(self, ParserDb::AssistanceService.new(get_price, days)).call
              }
     end
 

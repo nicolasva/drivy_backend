@@ -28,7 +28,7 @@ module ParserDb
         @price += (@car.price_per_day - @car.price_per_day*get_purcent(day))
       end
 
-      {id: params['id'], price: get_price.to_i, commission: AssistanceService.new(get_price, days).call}
+      {id: params['id'], price: get_price.to_i, commission: ParserDb::AssistanceService.new(get_price, days).call}
     end
 
     private

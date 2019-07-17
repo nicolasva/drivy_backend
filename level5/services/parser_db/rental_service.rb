@@ -42,7 +42,7 @@ module ParserDb
       price
       return {id:      params['id'],
               options: options,
-              action:  ParserDb::PaymentService.new(self, AssistanceService.new(get_price, days, @result_options, @price_option)).call
+              action:  ParserDb::PaymentService.new(self, ParserDb::AssistanceService.new(get_price, days, @result_options, @price_option)).call
              }
     end
 
