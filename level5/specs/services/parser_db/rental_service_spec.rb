@@ -44,6 +44,11 @@ RSpec.describe ParserDb::RentalService do
     it "id" do
       expect(subject.id).to eq(id)
     end
+  end
 
+  describe "#call" do
+    it "work" do
+      subject.call
+    end
   end
 end

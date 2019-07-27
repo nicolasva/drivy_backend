@@ -31,11 +31,11 @@ module ParserDb
     attr_writer :price
 
     def call 
-      #begin
+      begin
         count_rental
-      #rescue
-      #  puts "error no car find"
-      #end
+      rescue
+        puts "error no car find"
+      end
     end
 
     def count_rental
