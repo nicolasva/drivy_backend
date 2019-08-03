@@ -5,6 +5,7 @@ require '../../../services/parser_db/rental_service.rb'
 require '../../../services/parser_db_service.rb'
 require '../../../services/parser_db/assistance_service.rb'
 require '../../../services/parser_db/payment_service.rb'
+require '../../../services/parser_db/option_service.rb'
 require 'rspec'
 
 RSpec.describe ParserDb::RentalService do
@@ -29,6 +30,22 @@ RSpec.describe ParserDb::RentalService do
       expect(subject.purcents).to eq(purcents)
     end
 
+    it "car id" do
+      expect(subject.car.id).to eq(1)
+    end
+
+    it "car price per day" do
+      expect(subject.car.price_per_day).to eq(2000)
+    end
+
+    it "car price per km" do
+      expect(subject.car.price_per_km).to eq(10)
+    end
+
+    it "distance" do
+      expect(subject.distance).to eq(params['distance'])
+    end
+
     it "start_date" do
       expect(subject.start_date).to eq(start_date)
     end
@@ -44,11 +61,18 @@ RSpec.describe ParserDb::RentalService do
     it "id" do
       expect(subject.id).to eq(id)
     end
+
+
+    it "options" do
+      expect(subject.options).to eq(["gps", "baby_seat"])
+    end
   end
 
   describe "#call" do
     it "work" do
       subject.call
     end
+
+
   end
 end
